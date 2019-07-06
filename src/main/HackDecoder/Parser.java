@@ -54,6 +54,7 @@ public class Parser {
     }
 
     public void commandType() {
+        reset();
         if (this.curr.startsWith("@")) {
             this.commandType = "A";
             this.AType();
@@ -67,9 +68,14 @@ public class Parser {
     }
 
     public void AType() {
-        this.curr = curr.substring(1, curr.length());
-        this._symbol = curr;
-        System.out.println(this._symbol);
+        try {
+            this.curr = curr.substring(1, curr.length());
+            this._symbol = decToBin(curr);
+            System.out.println(this._symbol);
+        } catch (NumberFormatException e) {
+            this.curr = curr.substring(1, curr.length());
+            System.out.println(this._symbol);
+        }
     }
 
     public void CType() {
@@ -79,7 +85,7 @@ public class Parser {
             System.out.println(bc.CInstruction(this._comp,this._dest,true));
         } else if (this.curr.contains(";")) {
             this._jump = curr.split(";")[1];
-            this._dest = curr.split(";")[0];
+            this._comp = curr.split(";")[0];
             System.out.println(bc.CInstruction(this._comp,this._jump));
         }
 
@@ -88,12 +94,15 @@ public class Parser {
 
     public void LType() {
         this._symbol = this.curr.substring(1, curr.indexOf(")"));
-        System.out.println(this._symbol);
+    }
+
+    public String decToBin(String dec) throws NumberFormatException {
+        return Integer.toBinaryString(0x10000 | Integer.parseInt(dec)).substring(1);
     }
 
     public static void main(String[] args) {
 
-        Parser p = new Parser("C:/Users/Tru/Desktop/NandtoTetrix/Nand/src/Max.asm");
+        Parser p = new Parser("C:/Users/Tru/Desktop/NandtoTetrix/Nand/src/Pong.asm");
         p.advance();
     }
 }

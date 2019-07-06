@@ -1,3 +1,11 @@
-An App that will decode assembly languague to binary code. It's for 16bit Hack computer
 
-It's made for the Hack machine according to Nand2Tetris book 
+Apps are created according to Nand2Tetris
+
+
+HackDecoder app let the user to decode from assembly in HACK computer to binary code
+VMTranslator app translate from VM code to assembly with stack-alike implementation
+
+
+
+
+
